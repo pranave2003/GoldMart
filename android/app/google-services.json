@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "157378580091",
+    "project_id": "gold-mart-9c3b4",
+    "storage_bucket": "gold-mart-9c3b4.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:157378580091:android:90c9b7d9bdf34c38229cde",
+        "android_client_info": {
+          "package_name": "com.example.demo"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDv_CLitihjQLM7kAi-BDUbw9FxytAmxV0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
