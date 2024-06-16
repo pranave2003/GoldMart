@@ -1,6 +1,5 @@
 import 'package:carousel_slider/carousel_slider.dart';
-import 'package:demo/User/user_buy.dart';
-import 'package:demo/User/user_history.dart';
+
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -52,8 +51,12 @@ class _UserHomeState extends State<UserHome> {
         ],
         backgroundColor: Colors.black,
       ),
-      body: SingleChildScrollView(
-        child: Column(
+      body: Container(
+        height: double.infinity,
+        width: double.infinity,
+        decoration: BoxDecoration(
+            image: DecorationImage(image: AssetImage("assets/gold.jpg"))),
+        child: ListView(
           children: [
             CarouselSlider(
               options: CarouselOptions(
@@ -215,7 +218,9 @@ class _UserHomeState extends State<UserHome> {
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: Container(
-                color: Colors.white30,
+                decoration: BoxDecoration(
+                    image:
+                        DecorationImage(image: AssetImage("assets/share.jpg"))),
                 child: ListTile(
                   leading: Icon(Icons.show_chart, color: Colors.amber),
                   title: Padding(
@@ -226,8 +231,8 @@ class _UserHomeState extends State<UserHome> {
                           TextStyle(color: Colors.blue.shade100, fontSize: 20),
                     ),
                   ),
-                  subtitle: Image.network(
-                    "https://goldprice.org/charts/gold_1d_o_INR_z.png", // Placeholder image
+                  subtitle: Image.asset(
+                    "assets/share.jpg", // Placeholder image
                     height: 150,
                   ),
                 ),

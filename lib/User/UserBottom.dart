@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import 'User_profile.dart';
+import 'Userorder.dart';
 
 class Userbottom extends StatefulWidget {
   const Userbottom({super.key});
@@ -13,7 +14,7 @@ class Userbottom extends StatefulWidget {
 
 class _UserbottomState extends State<Userbottom> {
   int currentindex = 0;
-  final pages = [UserHome(), Userprofile()];
+  final pages = [UserHome(), Userorder(), Userprofile()];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -30,13 +31,19 @@ class _UserbottomState extends State<Userbottom> {
           BottomNavigationBarItem(
               icon: Icon(
                 CupertinoIcons.home,
-                color: Colors.white,
+                color: Colors.amber,
               ),
               label: 'Home'),
           BottomNavigationBarItem(
               icon: Icon(
+                CupertinoIcons.today,
+                color: Colors.amber,
+              ),
+              label: 'Order'),
+          BottomNavigationBarItem(
+              icon: Icon(
                 CupertinoIcons.person_crop_circle_fill,
-                color: Colors.white,
+                color: Colors.amber,
               ),
               label: 'Profile'),
         ],

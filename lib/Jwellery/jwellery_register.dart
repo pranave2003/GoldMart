@@ -34,7 +34,8 @@ class _JwelleryRegisterState extends State<JwelleryRegister> {
       "Password": password.text,
       "Confirm Password": confirmpassword.text,
       "path": "https://www.dpjewellers.com/images/gold-catl-07.webp",
-      "AMOUNT":"0"
+      "AMOUNT": "0",
+      "GOLD": "0"
     });
     Navigator.push(context, MaterialPageRoute(
       builder: (context) {

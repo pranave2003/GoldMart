@@ -42,8 +42,7 @@ class _JwelleryLoginState extends State<JwelleryLogin> {
           content: Text(
         "username and password error",
         style: TextStyle(color: Colors.red),
-      ))
-      );
+      )));
     }
   }
 

@@ -4,7 +4,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import 'JewSell.dart';
-import 'JewlleryBuy.dart';
+import 'Jewbuy.dart';
 
 class Jewhome extends StatefulWidget {
   const Jewhome({super.key});
@@ -129,11 +129,14 @@ class _JewhomeState extends State<Jewhome> {
                     ),
                   ),
                 ),
-                InkWell(onTap: () {
-                  Navigator.push(context, MaterialPageRoute(builder: (context) {
-                    return JewlleryBuy();
-                  },));
-                },
+                InkWell(
+                  onTap: () {
+                    Navigator.push(context, MaterialPageRoute(
+                      builder: (context) {
+                        return Jewbuy();
+                      },
+                    ));
+                  },
                   child: Container(
                     height: 130,
                     width: 100,

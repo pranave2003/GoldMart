@@ -13,7 +13,6 @@ class UserSell extends StatefulWidget {
 }
 
 class _UserSellState extends State<UserSell> {
-
   final formkey = GlobalKey<FormState>();
   var amountrl = TextEditingController();
   bool isloading = false;
@@ -104,7 +103,6 @@ class _UserSellState extends State<UserSell> {
                                     style: TextStyle(fontSize: 20),
                                   )),
                               Text(":"),
-                              Text("RS."),
                               Text(
                                 user!["AMOUNT"],
                                 style: TextStyle(fontSize: 20),
@@ -119,7 +117,7 @@ class _UserSellState extends State<UserSell> {
                               SizedBox(
                                   width: 100,
                                   child: Text(
-                                    "Email",
+                                    "EMAIL",
                                     style: TextStyle(fontSize: 20),
                                   )),
                               Text(":"),
@@ -130,8 +128,42 @@ class _UserSellState extends State<UserSell> {
                             ],
                           ),
                         ),
-
-
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Row(
+                            children: [
+                              SizedBox(
+                                  width: 100,
+                                  child: Text(
+                                    "ADHAR",
+                                    style: TextStyle(fontSize: 20),
+                                  )),
+                              Text(":"),
+                              Text(
+                                user!["vaild proof"],
+                                style: TextStyle(fontSize: 20),
+                              )
+                            ],
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Row(
+                            children: [
+                              SizedBox(
+                                  width: 100,
+                                  child: Text(
+                                    "GOLD",
+                                    style: TextStyle(fontSize: 20),
+                                  )),
+                              Text(":"),
+                              Text(
+                                " ${user!["GOLD"]} gram",
+                                style: TextStyle(fontSize: 20),
+                              )
+                            ],
+                          ),
+                        ),
                       ],
                     ),
                     decoration: BoxDecoration(
@@ -145,38 +177,44 @@ class _UserSellState extends State<UserSell> {
               ),
               MyTextFields(
                   controller: amountrl,
-                  hintText: "EnterAmount",
+                  hintText: "EnterQuantity in gram",
                   obscureText: false,
                   validation: "Invalid Amount"),
+              SizedBox(
+                height: 30,
+              ),
               InkWell(
                 onTap: () {
                   if (formkey.currentState!.validate()) {
-                    int a = int.parse(user!["AMOUNT"]);
+                    int a = int.parse(user!["GOLD"]);
                     int b = int.parse(amountrl.text);
+                    int amount = b * 6500;
                     var c = a - b;
-                    if (a > b) {
-                      FirebaseFirestore.instance
-                          .collection("USER_SELL")
-                          .add({
-                        "Amount": amountrl.text,
-                        "Jewlleryname": user!["User Name"],
-                        "jewlleryid": user?.id
+
+                    if (a >= b) {
+                      FirebaseFirestore.instance.collection("USER_SELL").add({
+                        "gram": amountrl.text,
+                        "amount": amount.toString(),
+                        "username": user!["User Name"],
+                        "userid": user?.id,
+                        "status": "0",
+                        "Buyingownerid": ''
                       });
 
                       print(c);
                       FirebaseFirestore.instance
-                          .collection("JewReg")
+                          .collection("UserReg")
                           .doc(Userid)
-                          .update({"AMOUNT": c.toString()});
+                          .update({"GOLD": c.toString()});
                       Navigator.of(context).pop();
 
                       print("Done");
                     } else {
                       ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
                           content: Text(
-                            "invalid amount Please purchase ",
-                            style: TextStyle(color: Colors.red),
-                          )));
+                        "invalid amount Please purchase ",
+                        style: TextStyle(color: Colors.red),
+                      )));
                     }
                   }
                 },

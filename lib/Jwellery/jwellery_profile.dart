@@ -51,12 +51,12 @@ class _JwelleryProfileState extends State<JwelleryProfile> {
           body: Column(
             children: [
               Container(
-                height: 165,
+                height: 200,
                 width: double.infinity,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.only(
                       bottomLeft: Radius.circular(1),
-                      bottomRight: Radius.circular(100)),
+                      bottomRight: Radius.circular(30)),
                   gradient: LinearGradient(
                     begin: Alignment.topLeft,
                     end: Alignment.bottomRight,
@@ -68,28 +68,33 @@ class _JwelleryProfileState extends State<JwelleryProfile> {
                 ),
                 child: Column(
                   children: [
-                    Padding(
-                      padding: const EdgeInsets.only(left: 20, top: 60),
-                      child: jwellery!["path"] == null
-                          ? Row(
-                              children: [
-                                CircleAvatar(
-                                  backgroundImage:
-                                      AssetImage("assets/gold.jpg"),
-                                  radius: 40,
-                                ),
-                              ],
-                            )
-                          : Row(
-                              children: [
-                                CircleAvatar(
-                                  backgroundImage:
-                                      NetworkImage(jwellery!["path"]),
-                                  radius: 40,
-                                ),
-                              ],
-                            ),
+                    SizedBox(
+                      height: 100,
                     ),
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Row(
+                        children: [
+                          Text(
+                            "TOTAL AMOUNT :${jwellery!["AMOUNT"]}",
+                            style: TextStyle(
+                                fontSize: 20, fontWeight: FontWeight.w900),
+                          )
+                        ],
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Row(
+                        children: [
+                          Text(
+                            "BALANCE GOLD :${jwellery!["GOLD"]}gram",
+                            style: TextStyle(
+                                fontSize: 20, fontWeight: FontWeight.w900),
+                          )
+                        ],
+                      ),
+                    )
                   ],
                 ),
               ),

@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:demo/User/UserLogin.dart';
-import 'package:demo/User/user_welcome.dart';
+
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
@@ -33,7 +33,8 @@ class _UserRegisterState extends State<UserRegister> {
       "Confirm Password": confirmpassword.text,
       "path":
           "https://th.bing.com/th/id/OIP.w2McZSq-EYWxh02iSvC3xwHaHa?w=200&h=200&c=7&r=0&o=5&dpr=1.3&pid=1.7",
-      "AMOUNT":"500"
+      "AMOUNT": "500",
+      "GOLD": "1"
     });
     print('done');
     Navigator.push(context, MaterialPageRoute(
