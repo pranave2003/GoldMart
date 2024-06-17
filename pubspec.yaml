@@ -34,6 +34,7 @@ dependencies:
   fluttertoast: ^8.2.4
   firebase_core: ^2.30.1
   cloud_firestore: ^4.17.2
+  upi_india: ^3.0.1
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.

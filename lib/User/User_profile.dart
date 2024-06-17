@@ -308,59 +308,60 @@ class _UserprofileState extends State<Userprofile> {
             body: Column(
               children: [
                 Container(
-                  height: 165,
+                  height: 200,
                   width: double.infinity,
                   decoration: BoxDecoration(
+                    image: DecorationImage(
+                        image: AssetImage("assets/gold.jpg"), fit: BoxFit.fill),
                     borderRadius: BorderRadius.only(
                       bottomLeft: Radius.circular(1),
-                      bottomRight: Radius.circular(20),
-                    ),
-                    gradient: LinearGradient(
-                      begin: Alignment.topLeft,
-                      end: Alignment.bottomRight,
-                      colors: [
-                        Color.fromRGBO(183, 153, 30, 1.0),
-                        Color.fromRGBO(246, 130, 45, 1.0),
-                      ],
+                      bottomRight: Radius.circular(30),
                     ),
                   ),
                   child: Column(
                     children: [
+                      SizedBox(height: 50),
                       Padding(
-                        padding: const EdgeInsets.only(right: 300),
-                        child: ClipOval(
-                          child: Padding(
-                            padding: const EdgeInsets.all(30),
-                            child: Image.asset(
-                              "assets/profile.png",
-                              height: 40,
-                              width: 40,
-                              fit: BoxFit.contain,
+                        padding: const EdgeInsets.all(8.0),
+                        child: Row(
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: CircleAvatar(
+                                backgroundImage: AssetImage("assets/cash.jpg"),
+                              ),
                             ),
-                          ),
+                            Text(
+                              "Rs : ${user!["AMOUNT"]}",
+                              style: TextStyle(
+                                fontSize: 25,
+                                color: Colors.amber,
+                                fontWeight: FontWeight.w500,
+                              ),
+                            ),
+                          ],
                         ),
                       ),
-                      Row(
-                        children: [
-                          Text(
-                            "TOTAL AMOUNT :${user["AMOUNT"]}",
-                            style: TextStyle(
-                              fontSize: 20,
-                              fontWeight: FontWeight.w900,
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Row(
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: CircleAvatar(
+                                backgroundImage: AssetImage("assets/coin.jpg"),
+                              ),
                             ),
-                          ),
-                        ],
-                      ),
-                      Row(
-                        children: [
-                          Text(
-                            "BALANCE GOLD :${user["GOLD"]}gram",
-                            style: TextStyle(
-                              fontSize: 20,
-                              fontWeight: FontWeight.w900,
+                            Text(
+                              "${user!["GOLD"]} Gram",
+                              style: TextStyle(
+                                fontSize: 25,
+                                color: Colors.amber,
+                                fontWeight: FontWeight.w900,
+                              ),
                             ),
-                          ),
-                        ],
+                          ],
+                        ),
                       ),
                     ],
                   ),

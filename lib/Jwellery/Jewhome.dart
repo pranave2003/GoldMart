@@ -36,7 +36,7 @@ class _JewhomeState extends State<Jewhome> {
       appBar: AppBar(
         automaticallyImplyLeading: false,
         title: Text(
-          "GOLD MART",
+          "JEWELLERY  MART",
           style: GoogleFonts.almendra(
               textStyle: TextStyle(color: Colors.amber, fontSize: 35)),
         ),

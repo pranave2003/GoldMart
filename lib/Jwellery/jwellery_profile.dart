@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import 'Payscreen.dart';
+
 class JwelleryProfile extends StatefulWidget {
   const JwelleryProfile({super.key});
 
@@ -14,6 +16,7 @@ class JwelleryProfile extends StatefulWidget {
 class _JwelleryProfileState extends State<JwelleryProfile> {
   String? ID;
   DocumentSnapshot? jwellery;
+  var amountctrl = TextEditingController();
 
   @override
   void initState() {
@@ -27,6 +30,18 @@ class _JwelleryProfileState extends State<JwelleryProfile> {
       jwellery =
           await FirebaseFirestore.instance.collection('JewReg').doc(ID).get();
     }
+  }
+
+  void update() {
+    print("insert");
+    int currentamount = int.parse(jwellery!["AMOUNT"]);
+    int enteramount = int.parse(amountctrl.text);
+    var totalcurrentbalance = currentamount + enteramount;
+    FirebaseFirestore.instance
+        .collection("JewReg")
+        .doc(ID)
+        .update({"AMOUNT": totalcurrentbalance.toString()});
+    print("update success");
   }
 
   @override
@@ -128,34 +143,79 @@ class _JwelleryProfileState extends State<JwelleryProfile> {
                     detailRow("EMAIL", jwellery!["Mail"]),
                     detailRow("Licence Number", jwellery!["Licence Number"]),
                     Padding(
-                      padding: const EdgeInsets.only(left: 25),
+                      padding: const EdgeInsets.only(top: 100),
                       child: InkWell(
                         onTap: () {
-                          Navigator.pushReplacement(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => JwelleryLogin()),
+                          showDialog(
+                            context: context,
+                            builder: (context) {
+                              return AlertDialog(
+                                backgroundColor: Colors.black,
+                                title: Text(
+                                  "Enter Amount",
+                                  style: TextStyle(color: Colors.amber),
+                                ),
+                                content: TextFormField(
+                                    keyboardType: TextInputType.number,
+                                    controller: amountctrl,
+                                    validator: (value) {
+                                      if (value!.isEmpty) {
+                                        return 'empty file';
+                                      }
+                                    },
+                                    style: TextStyle(),
+                                    decoration: InputDecoration(
+                                        filled: true,
+                                        border: InputBorder.none,
+                                        hintText: "Enter amount")),
+                                actions: [
+                                  Center(
+                                    child: ElevatedButton(
+                                        style: ElevatedButton.styleFrom(
+                                            backgroundColor: Colors.white30),
+                                        onPressed: () {
+                                          Navigator.push(context,
+                                              MaterialPageRoute(
+                                            builder: (context) {
+                                              return UpiPaymentScreen(
+                                                price: double.parse(
+                                                    amountctrl.text),
+                                              );
+                                            },
+                                          ));
+                                          update();
+                                        },
+                                        child: Text(
+                                          "PAY",
+                                          style: TextStyle(color: Colors.amber),
+                                        )),
+                                  )
+                                ],
+                              );
+                            },
                           );
                         },
-                        child: Padding(
-                          padding: const EdgeInsets.only(left: 80, top: 100),
-                          child: Container(
-                            height: 40,
-                            width: 150,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(10),
-                              color: Colors.red,
-                            ),
-                            child: Center(
-                              child: Text(
-                                "Logout",
-                                style: GoogleFonts.ubuntu(
-                                  color: Colors.black,
-                                  fontSize: 20,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Container(
+                              height: 40,
+                              width: 150,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(10),
+                                color: Colors.amber,
+                              ),
+                              child: Center(
+                                child: Text(
+                                  "ADD AMOUNT",
+                                  style: GoogleFonts.ubuntu(
+                                    color: Colors.black,
+                                    fontSize: 20,
+                                  ),
                                 ),
                               ),
                             ),
-                          ),
+                          ],
                         ),
                       ),
                     ),
