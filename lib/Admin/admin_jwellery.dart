@@ -17,7 +17,6 @@ class _AdminJwelleryState extends State<AdminJwellery> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          automaticallyImplyLeading: false,
           backgroundColor: Colors.black,
           title: Center(
               child: Text(
@@ -28,16 +27,15 @@ class _AdminJwelleryState extends State<AdminJwellery> {
         backgroundColor: Colors.black,
         body: FutureBuilder(
           future: FirebaseFirestore.instance.collection("JewReg").get(),
-          builder: (context,AsyncSnapshot<QuerySnapshot> snapshot) {
-            if(snapshot.connectionState==ConnectionState.waiting){
+          builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
+            if (snapshot.connectionState == ConnectionState.waiting) {
               return CircularProgressIndicator();
             }
-            if(snapshot.hasError)
-              {
-                return Text("Error:${snapshot.error}");
-              }
-            final JwellList=snapshot.data?.docs??[];
-            return  ListView.builder(
+            if (snapshot.hasError) {
+              return Text("Error:${snapshot.error}");
+            }
+            final JwellList = snapshot.data?.docs ?? [];
+            return ListView.builder(
               itemCount: JwellList.length,
               itemBuilder: (context, index) {
                 return Center(
@@ -48,44 +46,58 @@ class _AdminJwelleryState extends State<AdminJwellery> {
                         height: MediaQuery.of(context).size.height * .02,
                       ),
                       Card(
-                          child: ListTile(
-                            leading: Text(
-                              JwellList[index]["Jwellery Name"],
-                              style: TextStyle(
-                                color: Colors.black,
-                                fontSize: 18,
-                              ),
-                            ),
-
-
-                            trailing: Row(
-                              mainAxisSize: MainAxisSize.min,
-                              children: [
-                                InkWell(
-                                    onTap: (){
-                                      Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                            builder: (context) => AdminJwellview(
-                                              id:JwellList[index].id
-                                            ),
-                                          ));
-                                    },
-                                    child: Icon(CupertinoIcons.eye)),
-                                SizedBox(
-                                  height: MediaQuery.of(context).size.height * .03,
+                          child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: ListTile(
+                          leading: Column(
+                            children: [
+                              Text(
+                                JwellList[index]["Jwellery Name"],
+                                style: TextStyle(
+                                  color: Colors.black,
+                                  fontSize: 18,
                                 ),
-
-                                InkWell(
-                                    onTap: (){
-                                      setState(() {
-                                        FirebaseFirestore.instance.collection("JewReg").doc(JwellList[index].id).delete();
-                                      });
-                                    },
-                                    child: Icon(CupertinoIcons.delete)),
-                              ],
-                            ),
-                          )),
+                              ),
+                              Text(
+                                JwellList[index]["Mail"],
+                                style: TextStyle(
+                                  color: Colors.black,
+                                  fontSize: 18,
+                                ),
+                              ),
+                            ],
+                          ),
+                          trailing: Row(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              InkWell(
+                                  onTap: () {
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) => AdminJwellview(
+                                              id: JwellList[index].id),
+                                        ));
+                                  },
+                                  child: Icon(CupertinoIcons.eye)),
+                              SizedBox(
+                                height:
+                                    MediaQuery.of(context).size.height * .03,
+                              ),
+                              InkWell(
+                                  onTap: () {
+                                    setState(() {
+                                      FirebaseFirestore.instance
+                                          .collection("JewReg")
+                                          .doc(JwellList[index].id)
+                                          .delete();
+                                    });
+                                  },
+                                  child: Icon(CupertinoIcons.delete)),
+                            ],
+                          ),
+                        ),
+                      )),
                       SizedBox(
                         height: 30,
                       ),
@@ -95,7 +107,6 @@ class _AdminJwelleryState extends State<AdminJwellery> {
               },
             );
           },
-
         ));
   }
 }

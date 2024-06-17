@@ -39,7 +39,7 @@ class _UserbottomState extends State<Userbottom> {
                 CupertinoIcons.today,
                 color: Colors.amber,
               ),
-              label: 'Order'),
+              label: ''),
           BottomNavigationBarItem(
               icon: Icon(
                 CupertinoIcons.person_crop_circle_fill,

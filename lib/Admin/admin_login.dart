@@ -26,7 +26,7 @@ class _AdminloginState extends State<Adminlogin> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.red,
+      backgroundColor: Colors.black,
       body: Container(
         decoration: BoxDecoration(
             image: DecorationImage(
