@@ -44,7 +44,7 @@ class _UserorderState extends State<Userorder> {
       body: FutureBuilder(
         future: FirebaseFirestore.instance
             .collection("Jewllery_SELL")
-            .where("Buyingownerid", isEqualTo: ID)
+            .where("Buyinguserownerid", isEqualTo: ID)
             .where("status", isEqualTo: "1")
             .get(),
         builder: (context, snapshot) {
